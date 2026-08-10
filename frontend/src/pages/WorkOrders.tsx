@@ -145,6 +145,15 @@ const WorkOrders: React.FC = () => {
         }
     };
 
+    let currentUserRole = '';
+    try {
+        const userObj = JSON.parse(localStorage.getItem('user') || '{}');
+        currentUserRole = userObj.role || '';
+    } catch(e) {}
+    
+    const isAdminOrSupervisor = currentUserRole === 'ROLE_ADMIN' || currentUserRole === 'ADMIN' || currentUserRole === 'ROLE_SUPERVISOR' || currentUserRole === 'SUPERVISOR';
+    const isAdmin = currentUserRole === 'ROLE_ADMIN' || currentUserRole === 'ADMIN';
+
     return (
         <div className="work-orders-page">
             <div className="flex justify-between items-center mb-6">
@@ -152,9 +161,11 @@ const WorkOrders: React.FC = () => {
                     <h1>Órdenes de Trabajo</h1>
                     <p>Gestiona y asigna las tareas de mantenimiento.</p>
                 </div>
-                <button className="btn btn-primary" onClick={() => handleOpenModal()}>
-                    <Plus size={18} /> Nueva Orden
-                </button>
+                {isAdminOrSupervisor && (
+                    <button className="btn btn-primary" onClick={() => handleOpenModal()}>
+                        <Plus size={18} /> Nueva Orden
+                    </button>
+                )}
             </div>
 
             <div className="glass-card mb-6">
@@ -206,9 +217,11 @@ const WorkOrders: React.FC = () => {
                                                 <button onClick={() => handleOpenModal(item)} className="btn btn-secondary" style={{padding: '0.4rem', color: '#60A5FA'}}>
                                                     <Edit2 size={16} />
                                                 </button>
-                                                <button onClick={() => handleDelete(item.id)} className="btn btn-danger" style={{padding: '0.4rem'}}>
-                                                    <Trash2 size={16} />
-                                                </button>
+                                                {isAdmin && (
+                                                    <button onClick={() => handleDelete(item.id)} className="btn btn-danger" style={{padding: '0.4rem'}}>
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>

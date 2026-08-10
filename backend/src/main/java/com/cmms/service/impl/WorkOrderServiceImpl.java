@@ -35,6 +35,11 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     }
 
     @Override
+    public Page<WorkOrder> getWorkOrdersByAssignee(Long userId, Pageable pageable) {
+        return workOrderRepository.findByAssignedToId(userId, pageable);
+    }
+
+    @Override
     @Transactional
     public WorkOrder createWorkOrder(WorkOrder workOrder) {
         if (workOrder.getStatus() == null) {

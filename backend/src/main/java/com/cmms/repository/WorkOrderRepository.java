@@ -14,7 +14,8 @@ public interface WorkOrderRepository extends JpaRepository<WorkOrder, Long> {
     Page<WorkOrder> findByType(WorkOrder.Type type, Pageable pageable);
     Page<WorkOrder> findByPriority(WorkOrder.Priority priority, Pageable pageable);
     Page<WorkOrder> findByEquipmentId(Long equipmentId, Pageable pageable);
-    
+    Page<WorkOrder> findByAssignedToId(Long assigneeId, Pageable pageable);
+
     // For Dashboard
     long countByStatus(WorkOrder.Status status);
     

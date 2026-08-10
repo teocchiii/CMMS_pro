@@ -21,7 +21,13 @@ public class WorkOrderController {
     private final UserRepository userRepository;
 
     @GetMapping
-    public ResponseEntity<Page<WorkOrder>> getAllWorkOrders(Pageable pageable) {
+    public ResponseEntity<Page<WorkOrder>> getAllWorkOrders(Pageable pageable, java.security.Principal principal) {
+        if (principal != null) {
+            var user = userRepository.findByUsername(principal.getName());
+            if (user.isPresent() && com.cmms.model.User.Role.TECHNICIAN.equals(user.get().getRole())) {
+                return ResponseEntity.ok(workOrderService.getWorkOrdersByAssignee(user.get().getId(), pageable));
+            }
+        }
         return ResponseEntity.ok(workOrderService.getAllWorkOrders(pageable));
     }
 

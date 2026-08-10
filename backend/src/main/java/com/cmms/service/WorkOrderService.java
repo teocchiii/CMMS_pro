@@ -8,6 +8,7 @@ public interface WorkOrderService {
     Page<WorkOrder> getAllWorkOrders(Pageable pageable);
     WorkOrder getWorkOrderById(Long id);
     Page<WorkOrder> getWorkOrdersByStatus(WorkOrder.Status status, Pageable pageable);
+    Page<WorkOrder> getWorkOrdersByAssignee(Long userId, Pageable pageable);
     WorkOrder createWorkOrder(WorkOrder workOrder);
     WorkOrder updateWorkOrder(Long id, WorkOrder workOrderDetails);
     WorkOrder changeStatus(Long id, WorkOrder.Status newStatus);

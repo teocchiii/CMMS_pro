@@ -18,4 +18,17 @@ public class UserServiceImpl implements UserService {
     public Page<UserDTO> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(UserDTO::fromEntity);
     }
+
+    @Override
+    public UserDTO createUser(com.cmms.model.User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new RuntimeException("Username is already taken!");
+        }
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new RuntimeException("Email is already in use!");
+        }
+        
+        com.cmms.model.User savedUser = userRepository.save(user);
+        return UserDTO.fromEntity(savedUser);
+    }
 }
