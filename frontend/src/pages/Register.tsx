@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axiosConfig';
 import { User, Mail, Lock } from 'lucide-react';
 import './Login.css'; // Reutilizamos los estilos del login
 
@@ -15,7 +15,7 @@ const Register: React.FC = () => {
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8080/api/auth/register', {
+            await api.post('/auth/register', {
                 username,
                 email,
                 fullName,
