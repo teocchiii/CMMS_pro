@@ -10,6 +10,7 @@ import WorkOrders from './pages/WorkOrders';
 import SpareParts from './pages/SpareParts';
 import MaintenancePlans from './pages/MaintenancePlans';
 import Users from './pages/Users';
+import VerifyEmail from './pages/VerifyEmail';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const { isAuthenticated } = useAuth();
@@ -27,6 +28,7 @@ const App: React.FC = () => {
                     <Route path="/" element={<Navigate to="/dashboard" replace />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/verify-email" element={<VerifyEmail />} />
                     
                     <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
                         <Route index element={<Dashboard />} />
