@@ -7,6 +7,5 @@ import com.cmms.model.User;
 
 public interface AuthService {
     JwtResponse authenticateUser(LoginRequest loginRequest);
-    User registerUser(RegisterRequest signUpRequest);
-    boolean verifyEmail(String token);
+    User registerUser(RegisterRequest registerRequest);
 }

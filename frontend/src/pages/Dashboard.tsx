@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
                                     paddingAngle={5}
                                     dataKey="value"
                                 >
-                                    {ordersByStatus.map((entry, index) => (
+                                    {ordersByStatus.map((_, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>

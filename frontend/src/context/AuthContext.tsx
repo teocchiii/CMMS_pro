@@ -1,6 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import api from '../api/axiosConfig';
-
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 interface User {
     id: number;
     username: string;
