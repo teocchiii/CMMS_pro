@@ -13,12 +13,22 @@ const Layout: React.FC = () => {
         navigate('/login');
     };
 
+    const getRoleName = (role?: string) => {
+        if (!role) return '';
+        switch(role) {
+            case 'ROLE_ADMIN': return 'Administrador';
+            case 'ROLE_SUPERVISOR': return 'Supervisor';
+            case 'ROLE_TECHNICIAN': return 'Técnico';
+            default: return role.replace('ROLE_', '');
+        }
+    };
+
     return (
         <div className="app-container">
             <aside className="sidebar glass-card">
                 <div className="sidebar-header">
                     <h2>CMMS Pro</h2>
-                    <p className="user-role">{user?.role}</p>
+                    <p className="user-role">{getRoleName(user?.role)}</p>
                 </div>
 
                 <nav className="sidebar-nav">

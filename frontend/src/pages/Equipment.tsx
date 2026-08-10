@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axiosConfig';
-import { Package, Plus, Edit2, Trash2, Search, Download, FileText, FileSpreadsheet } from 'lucide-react';
+import { Package, Plus, Edit2, Trash2, Search, FileText, FileSpreadsheet } from 'lucide-react';
 import Modal from '../components/Modal';
 
 interface EquipmentData {

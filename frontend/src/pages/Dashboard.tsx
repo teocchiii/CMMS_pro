@@ -119,8 +119,8 @@ const Dashboard: React.FC = () => {
                                     ))}
                                 </Pie>
                                 <Tooltip 
-                                    contentStyle={{ background: 'rgba(30, 41, 59, 0.9)', border: 'none', borderRadius: '8px', color: '#fff' }}
-                                    itemStyle={{ color: '#fff' }}
+                                    contentStyle={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '8px', color: '#0F172A', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
+                                    itemStyle={{ color: '#0F172A' }}
                                 />
                                 <Legend />
                             </PieChart>
@@ -133,14 +133,14 @@ const Dashboard: React.FC = () => {
                     <div style={{ width: '100%', height: 300 }}>
                         <ResponsiveContainer>
                             <BarChart data={equipmentByStatus} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                                <XAxis dataKey="name" stroke="#cbd5e1" fontSize={12} tickMargin={10} />
-                                <YAxis stroke="#cbd5e1" fontSize={12} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" />
+                                <XAxis dataKey="name" stroke="#64748B" fontSize={12} tickMargin={10} />
+                                <YAxis stroke="#64748B" fontSize={12} />
                                 <Tooltip 
-                                    contentStyle={{ background: 'rgba(30, 41, 59, 0.9)', border: 'none', borderRadius: '8px', color: '#fff' }}
-                                    cursor={{fill: 'rgba(255,255,255,0.05)'}}
+                                    contentStyle={{ background: '#ffffff', border: '1px solid #E2E8F0', borderRadius: '8px', color: '#0F172A', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
+                                    cursor={{fill: 'rgba(0,0,0,0.03)'}}
                                 />
-                                <Bar dataKey="cantidad" fill="#6366F1" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="cantidad" fill="#2563EB" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>

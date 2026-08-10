@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 
         try {
             const response = await api.post('/auth/login', { username, password });
-            const { token, type, id, username: userStr, email, roles } = response.data;
+            const { token, id, username: userStr, email, roles } = response.data;
             
             login(token, { id, username: userStr, email, role: roles[0] });
             navigate('/');

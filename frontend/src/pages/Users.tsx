@@ -91,8 +91,11 @@ const Users: React.FC = () => {
                                 filteredUsers.map(item => (
                                     <tr key={item.id}>
                                         <td>#{item.id}</td>
-                                        <td className="font-medium flex items-center gap-2">
-                                            <UsersIcon size={16} className="text-muted" /> {item.username}
+                                        <td className="font-medium">
+                                            <div className="flex items-center gap-2">
+                                                <UsersIcon size={16} className="text-muted flex-shrink-0" /> 
+                                                <span>{item.username}</span>
+                                            </div>
                                         </td>
                                         <td>{item.fullName}</td>
                                         <td>{item.email}</td>

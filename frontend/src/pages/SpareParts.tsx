@@ -162,7 +162,7 @@ const SpareParts: React.FC = () => {
                                                 {item.stockQuantity}
                                             </td>
                                             <td>{item.minimumStock}</td>
-                                            <td>${item.unitCost.toFixed(2)}</td>
+                                            <td>S/. {item.unitCost.toFixed(2)}</td>
                                             <td>{item.supplier}</td>
                                             <td>
                                                 {isLowStock ? (

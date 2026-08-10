@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/axiosConfig';
-import { Wrench, Plus, Edit2, Trash2, Search, Filter } from 'lucide-react';
+import { Plus, Edit2, Trash2, Search, Filter } from 'lucide-react';
 import Modal from '../components/Modal';
 
 interface WorkOrder {
     id: number;
     orderNumber: string;
-    equipment: { name: string };
-    assignedTo: { username: string } | null;
+    equipment: { id: number; name: string };
+    assignedTo: { id: number; username: string } | null;
     type: string;
     priority: string;
     status: string;
