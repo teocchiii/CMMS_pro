@@ -20,9 +20,9 @@ const Login: React.FC = () => {
 
         try {
             const response = await api.post('/auth/login', { username, password });
-            const { token, id, username: userStr, email, roles } = response.data;
+            const { token, refreshToken, id, username: userStr, email, roles } = response.data;
             
-            login(token, { id, username: userStr, email, role: roles[0] });
+            login(token, refreshToken, { id, username: userStr, email, role: roles[0] });
             navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Error de autenticación. Verifica tus credenciales.');

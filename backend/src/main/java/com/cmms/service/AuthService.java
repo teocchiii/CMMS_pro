@@ -8,4 +8,5 @@ import com.cmms.model.User;
 public interface AuthService {
     JwtResponse authenticateUser(LoginRequest loginRequest);
     User registerUser(RegisterRequest registerRequest);
+    JwtResponse refreshToken(String refreshToken);
 }

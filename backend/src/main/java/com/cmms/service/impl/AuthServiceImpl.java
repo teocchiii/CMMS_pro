@@ -35,6 +35,7 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateToken(authentication);
+        String refreshJwt = jwtUtils.generateRefreshToken(authentication);
 
         org.springframework.security.core.userdetails.User userDetails = 
             (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
@@ -48,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
 
         return JwtResponse.builder()
                 .token(jwt)
+                .refreshToken(refreshJwt)
                 .id(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
@@ -75,5 +77,29 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         return userRepository.save(user);
+    }
+
+    public JwtResponse refreshToken(String refreshToken) {
+        if (refreshToken != null && jwtUtils.validateJwtToken(refreshToken)) {
+            String username = jwtUtils.getUsernameFromJwtToken(refreshToken);
+            User user = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            List<String> roles = List.of(user.getRole().name());
+
+            String newJwt = jwtUtils.generateTokenFromUsername(username);
+            String newRefreshJwt = jwtUtils.generateRefreshTokenFromUsername(username);
+
+            return JwtResponse.builder()
+                    .token(newJwt)
+                    .refreshToken(newRefreshJwt)
+                    .id(user.getId())
+                    .username(user.getUsername())
+                    .email(user.getEmail())
+                    .fullName(user.getFullName())
+                    .roles(roles)
+                    .build();
+        }
+        throw new RuntimeException("Invalid refresh token");
     }
 }
