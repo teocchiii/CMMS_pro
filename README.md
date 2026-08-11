@@ -18,6 +18,36 @@ El proyecto está dividido en dos capas principales contenerizadas y orquestadas
 2. **Frontend (React + Vite):** Interfaz de usuario moderna y reactiva que consume la API del backend.
 3. **Database (PostgreSQL):** Almacenamiento persistente de datos con volúmenes en Docker.
 
+### Diseño del Backend (Clean Architecture)
+
+El backend está diseñado siguiendo los principios de **Clean Architecture** (Arquitectura Limpia) y separación por capas lógicas, lo cual garantiza que la lógica de negocio se mantenga independiente de los frameworks, la base de datos y la interfaz web.
+
+```text
+HTTP / REST                 PostgreSQL
+     |                          ^
+     v                          |
+Controladores REST -> Servicios (Interfaces/Implementaciones) -> Repositorios JPA
+                         |
+                         v
+                    Modelos (Entidades)
+```
+
+Las capas están estrictamente divididas en:
+- **`model` (Dominio):** Entidades JPA que representan las reglas de negocio (ej. `User`, `WorkOrder`). No dependen de ninguna otra capa.
+- **`repository` (Datos):** Interfaces de Spring Data JPA que se comunican con PostgreSQL. 
+- **`service` (Aplicación/Casos de Uso):** Contiene la lógica de negocio pura.
+- **`controller` (Infraestructura/Presentación):** Expone los endpoints REST, recibe el HTTP Request, y delega el procesamiento a los servicios.
+
+#### Uso de Interfaces e Implementaciones
+
+Una piedra angular de esta arquitectura es la **Inversión de Dependencias (Dependency Inversion)**. En la capa de servicios (`service`), se define primero el "QUÉ" debe hacer el sistema a través de **Interfaces** (ej. `AuthService.java` o `WorkOrderService.java`). 
+
+El "CÓMO" se hace se delega a las **Implementaciones** dentro del paquete `service/impl` (ej. `AuthServiceImpl.java`). 
+
+**¿Por qué hacerlo así?**
+1. **Desacoplamiento:** Los controladores (REST) solo conocen a la Interfaz, no a la implementación. Si mañana cambiamos la lógica de autenticación o el proveedor de la base de datos, el controlador no sufre ninguna modificación.
+2. **Facilidad de Testing:** Al depender de interfaces, es extremadamente fácil crear "Mocks" (simulaciones) para las pruebas unitarias (como lo hacemos en `WorkOrderServiceImplTest`), probando la lógica de negocio en aislamiento sin necesidad de levantar una base de datos real.
+
 ## Requisitos Previos
 
 - Docker y Docker Compose instalados en tu máquina.
